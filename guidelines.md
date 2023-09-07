@@ -112,7 +112,7 @@ python scripts/socialcircle_toy_example.py
 Set positions of the manual neighbor to see model's outputs like:
 
 <div style="text-align: center;">
-    <img style="width: 100%;" src="./subassets/img/toy_example.png">
+    <img style="width: 100%;" src="../subassets/img/toy_example.png">
 </div>
 
 ## Args Used
