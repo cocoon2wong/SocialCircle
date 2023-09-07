@@ -28,6 +28,7 @@
         "**/readme.md",
         "**/README.md",
         "**/*.txt",
+        "**/*.md"
     ],
     "editor.unicodeHighlight.nonBasicASCII": true,
     "colorize.include": [

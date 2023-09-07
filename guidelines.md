@@ -11,7 +11,7 @@ gh-badge: [star, fork]
  * @Author: Conghao Wong
  * @Date: 2023-08-21 15:58:54
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-08-21 16:26:30
+ * @LastEditTime: 2023-09-07 14:56:53
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -19,58 +19,49 @@ gh-badge: [star, fork]
 
 ## Get Started
 
----
-
 You can clone [this repository](https://github.com/cocoon2wong/SocialCircle) by the following command:
 
 ```bash
 git clone https://github.com/cocoon2wong/SocialCircle.git
 ```
 
-Since the repository contains all the dataset files, this operation may take a longer time.
-Or you can just download the zip file from [here](https://codeload.github.com/cocoon2wong/SocialCircle/zip/refs/heads/main).
+Then, run the following command to initialize all submodules:
+
+```bash
+git submodule update --init --recursive
+```
 
 ## Requirements
 
----
-
-The codes are developed with python 3.9.
+The codes are developed with Python 3.9.
 Additional packages used are included in the `requirements.txt` file.
 
 {: .box-warning}
-**Warning:** We recommend installing all required python packages in a virtual environment (like the `conda` environment).
+**Warning:** We recommend installing all required Python packages in a virtual environment (like the `conda` environment).
 Otherwise, there *COULD* be other problems due to the package version conflicts.
 
-Run the following command to install the required packages in your python environment:
+Run the following command to install the required packages in your Python environment:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Read our post for more information about the environment configurations:
-
-<div style="text-align: center;">
-    <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/2022-03-03-env/">💡 Environment Configuration Guidelines</a>
-</div>
-
 ## Dataset Prepare and Process
 
----
-
-Before training `E-V^2-Net` on your own dataset, you should add your dataset information.
+Before training `SocialCircle` models on your own dataset, you should add your dataset information.
 See [this document](https://cocoon2wong.github.io/Project-Luna/) for details.
 
 ## Training
 
----
+*Available Soon*
 
 ## Evaluation
 
----
+*Available Soon*
 
 ### Pre-Trained Model Weights
 
-We have provided our pre-trained model weights to help you quickly evaluate the SocialCircle models' performance.
+We have provided our pre-trained model weights to help you quickly evaluate the `SocialCircle` models' performance.
 Our pre-trained models contain:
 
 - The basic transformer model for trajectory prediction (named the `Transformer`) and its SocialCircle variation `Transformer-SC` (8 frames' observations to 12 frames' predictions on SDD, only forecasts one deterministic trajectory for each agent);
@@ -78,7 +69,23 @@ Our pre-trained models contain:
 - `V^2-Net` ([🔗homepage](https://cocoon2wong.github.io/Vertical/)) and its SocialCircle variation `V^2-Net-SC` (8-to-12 on SDD, 20 trajectories);
 - `E-V^2-Net` ([🔗homepage](https://cocoon2wong.github.io/E-Vertical/)) and its SocialCircle variation `E-V^2-Net-SC` (8-to-12 on SDD, 20 trajectories).
 
-Click the following buttons to download our weights and learn about how to install these datasets.
+You can run the following commands to prepare ETH-UCY and SDD dataset files:
+
+1. Run Python the script inner the `dataset_original` folder:
+
+    ```bash
+    cd dataset_original && python main_ethucysdd.py
+    ```
+
+2. Back to the repo folder and create soft links:
+
+    ```bash
+    cd ..
+    ln -s dataset_original/dataset_processed ./
+    ln -s dataset_original/dataset_configs ./
+    ```
+
+Click the following buttons to download our weights and learn more about how to install these datasets.
 We recommend that you download the weights and place them in the `weights/SocialCircle` folder.
 
 <div style="text-align: center;">
@@ -86,9 +93,29 @@ We recommend that you download the weights and place them in the `weights/Social
     <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
 </div>
 
-## Args Used
+You can start evaluating our pre-trained weights by
 
----
+```bash
+python main.py --sc SOME_MODEL_WEIGHTS
+```
+
+Here, `SOME_MODEL_WEIGHTS` is the path of the weights folder, for example, `weights/SocialCircle/evsc_P8_sdd`.
+
+### Toy Example
+
+You can run the following script to learn how the proposed `SocialCircle` works in an interactive way:
+
+```bash
+python scripts/socialcircle_toy_example.py
+```
+
+Set positions of the manual neighbor to see model's outputs like:
+
+<div style="text-align: center;">
+    <img style="width: 100%;" src="./subassets/img/toy_example.png">
+</div>
+
+## Args Used
 
 Please specify your customized args when training or testing your model in the following way:
 
@@ -109,6 +136,7 @@ About the `argtype`:
   The program will parse these args from the terminal at each time.
 
 <!-- DO NOT CHANGE THIS LINE -->
+
 ### Basic Args
 
 - `--K_train`: type=`int`, argtype=`static`.
@@ -195,18 +223,15 @@ About the `argtype`:
 - `--obs_frames` (short for `-obs`): type=`int`, argtype=`static`.
   Observation frames for prediction. 
   The default value is `8`.
+- `--only_process_trajectory`: type=`int`, argtype=`static`.
+  (Pre/post-process Arg) Controls whether to process non-trajectory model inputs or not. 
+  The default value is `0`.
 - `--pmove`: type=`int`, argtype=`static`.
-  Index of the reference point when moving trajectories. 
+  (Pre/post-process Arg) Index of the reference point when moving trajectories. 
   The default value is `-1`.
 - `--pred_frames` (short for `-pred`): type=`int`, argtype=`static`.
   Prediction frames. 
   The default value is `12`.
-- `--protate`: type=`float`, argtype=`static`.
-  Reference degree when rotating trajectories. 
-  The default value is `0.0`.
-- `--pscale`: type=`str`, argtype=`static`.
-  Index of the reference point when scaling trajectories. 
-  The default value is `autoref`.
 - `--restore_args`: type=`str`, argtype=`temporary`.
   Path to restore the reference args before training. It will not restore any args if `args.restore_args == 'null'`. 
   The default value is `null`.
@@ -318,6 +343,18 @@ About the `argtype`:
 - `--rel_speed`: type=`int`, argtype=`static`.
   Choose whether to use the relative speed or the absolute speed as the speed factor in the SocialCircle. (Default to the `absolute speed`) 
   The default value is `0`.
+- `--use_direction`: type=`int`, argtype=`static`.
+  Choose whether to use the direction factor in the SocialCircle. 
+  The default value is `1`.
+- `--use_distance`: type=`int`, argtype=`static`.
+  Choose whether to use the distance factor in the SocialCircle. 
+  The default value is `1`.
+- `--use_move_direction`: type=`int`, argtype=`static`.
+  Choose whether to use the move direction factor in the SocialCircle. 
+  The default value is `0`.
+- `--use_velocity`: type=`int`, argtype=`static`.
+  Choose whether to use the velocity factor in the SocialCircle. 
+  The default value is `1`.
 <!-- DO NOT CHANGE THIS LINE -->
 
 ## Contact us
