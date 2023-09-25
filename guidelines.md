@@ -50,6 +50,7 @@ pip install -r requirements.txt
 
 Before training `SocialCircle` models on your own dataset, you should add your dataset information.
 See [this document](https://cocoon2wong.github.io/Project-Luna/) for details.
+If you just want to validate these models on ETH-UCY and SDD, please head to the [Pre-Trained Model Weights](https://cocoon2wong.github.io/SocialCircle/guidelines/#pre-trained-model-weights) section.
 
 ## Training
 
@@ -64,7 +65,7 @@ See [this document](https://cocoon2wong.github.io/Project-Luna/) for details.
 We have provided our pre-trained model weights to help you quickly evaluate the `SocialCircle` models' performance.
 Our pre-trained models contain:
 
-- The basic transformer model for trajectory prediction (named the `Transformer`) and its SocialCircle variation `Transformer-SC` (8 frames' observations to 12 frames' predictions on SDD, only forecasts one deterministic trajectory for each agent);
+% - The basic transformer model for trajectory prediction (named the `Transformer`) and its SocialCircle variation `Transformer-SC` (8 frames' observations to 12 frames' predictions on SDD, only forecasts one deterministic trajectory for each agent);
 - `MSN` ([🔗homepage](https://northocean.github.io/MSN/)) and its SocialCircle variation `MSN-SC` (8-to-12 on SDD, forecasts 20 random sampled trajectories for each agent);
 - `V^2-Net` ([🔗homepage](https://cocoon2wong.github.io/Vertical/)) and its SocialCircle variation `V^2-Net-SC` (8-to-12 on SDD, 20 trajectories);
 - `E-V^2-Net` ([🔗homepage](https://cocoon2wong.github.io/E-Vertical/)) and its SocialCircle variation `E-V^2-Net-SC` (8-to-12 on SDD, 20 trajectories).
