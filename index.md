@@ -32,3 +32,8 @@ Click the buttons below for more information.
 
 Conghao Wong ([@cocoon2wong](https://github.com/cocoon2wong)): conghaowong@icloud.com  
 Beihao Xia ([@NorthOcean](https://github.com/NorthOcean)): xbh_hust@hust.edu.cn
+
+---
+SocialCircle (Project Silverbullet) with Qpid version [db144af
+](https://github.com/cocoon2wong/Project-Qpid/tree/db144af30fda8b76e946756368ececd7039c62fc) and Dataset version [f58dde5](https://github.com/cocoon2wong/Project-Luna/tree/f58dde59e51eb43068b3d6f03169dea46208a4de).
+Copyright 2023 Conghao Wong and Beihao Xia, All Rights Reserved.
