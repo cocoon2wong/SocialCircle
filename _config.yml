@@ -21,6 +21,7 @@ author: Copyright ©️ Beihao Xia & Conghao Wong
 
 navbar-links:
   Home: "/index"
+  How To Use: "/guidelines"
   GitHub Repo: "https://github.com/cocoon2wong/SocialCircle"
   Project Unpredictable: "https://cocoon2wong.github.io/index"
   GitHub:
