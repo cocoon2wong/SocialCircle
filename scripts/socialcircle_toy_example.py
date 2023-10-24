@@ -60,7 +60,7 @@ class BetaToyExample():
             self.t = t
             self.init_model()
             self.t.log(
-                f'Model `{toy.t.args.loada}` and dataset files ({CLIP}) loaded.')
+                f'Model `{t.args.loada}` and dataset files ({CLIP}) loaded.')
         except Exception as e:
             print(e)
 
