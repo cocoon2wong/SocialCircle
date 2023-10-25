@@ -2,21 +2,21 @@
 @Author: Conghao Wong
 @Date: 2022-06-20 15:28:14
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-09-06 20:33:07
+@LastEditTime: 2023-10-10 18:08:23
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
 """
 
-import os
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
-
 import sys
+
+import torch
 
 import qpid
 import socialCircle
 from scripts.utils import get_value
+
+torch.autograd.set_detect_anomaly(True)
 
 
 def main(args: list[str], run_train_or_test=True):

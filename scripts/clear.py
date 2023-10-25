@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2021-07-19 11:11:10
 @LastEditors: Conghao Wong
-@LastEditTime: 2022-11-11 09:35:32
+@LastEditTime: 2023-10-11 11:00:39
 @Description: file content
 @Github: https://github.com/cocoon2wong
 @Copyright 2022 Conghao Wong, All Rights Reserved.
@@ -29,20 +29,27 @@ def clean_logs(base_dir):
 
         if (fn := 'best_ade_epoch.txt') in files:
             best_epoch = np.loadtxt(os.path.join(cd, fn))[1].astype(int)
-            pattern = f'_epoch{best_epoch}.tf'
+            patterns = [f'_epoch{best_epoch}.tf',
+                        f'_epoch{best_epoch}.pt']
 
         else:
             continue
 
         for f in files:
             path = os.path.join(cd, f)
-            if pattern in f:
-                print(f'Find {path}.')
+            best_find = False
 
-            else:
-                if f.endswith('.tf.index') or '.tf.data' in f:
-                    print(f'Remove {path}.')
-                    os.remove(path)
+            for pattern in patterns:
+                if pattern in f:
+                    print(f'Find {path}.')
+                    best_find = True
+                    break
+
+            if not best_find and (f.endswith('.tf.index')
+                                  or ('.tf.data' in f)
+                                  or f.endswith('.pt')):
+                print(f'Remove {path}.')
+                os.remove(path)
 
 
 def clean_figs(base_dir):

@@ -2,13 +2,15 @@
  * @Author: Conghao Wong
  * @Date: 2023-08-21 15:58:54
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-09-07 15:06:02
+ * @LastEditTime: 2023-10-25 09:47:43
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
 -->
 
 # SocialCircle
+
+It is the official codes (*PyTorch version*) for "SocialCircle: Learning the Angle-based Social Interaction Representation for Pedestrian Trajectory Prediction".
 
 ## Get Started
 
@@ -26,7 +28,7 @@ git submodule update --init --recursive
 
 ## Requirements
 
-The codes are developed with Python 3.9.
+The codes are developed with Python 3.11.
 Additional packages used are included in the `requirements.txt` file.
 
 {: .box-warning}
@@ -81,10 +83,15 @@ You can run the following commands to prepare ETH-UCY and SDD dataset files:
 Click the following buttons to download our weights and learn more about how to install these datasets.
 We recommend that you download the weights and place them in the `weights/SocialCircle` folder.
 
-<div style="text-align: center;">
+<!-- <div style="text-align: center;">
     <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/releases">⬇️ Download Weights</a>
     <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
-</div>
+</div> -->
+
+{: .box-warning}
+**Warning:** The PyTorch version of codes only support weights that trained with PyTorch.
+Currently released weights that trained with TensorFlow can not be used in this branch.
+You can go to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch) to download the corresponding weights in the new format.
 
 You can start evaluating our pre-trained weights by
 
@@ -129,7 +136,6 @@ About the `argtype`:
   The program will parse these args from the terminal at each time.
 
 <!-- DO NOT CHANGE THIS LINE -->
-
 ### Basic Args
 
 - `--K_train`: type=`int`, argtype=`static`.
@@ -150,18 +156,6 @@ About the `argtype`:
 - `--dataset`: type=`str`, argtype=`static`.
   Name of the video dataset to train or evaluate. For example, `'ETH-UCY'` or `'SDD'`. NOTE: DO NOT set this argument manually. 
   The default value is `Unavailable`.
-- `--draw_distribution` (short for `-dd`): type=`int`, argtype=`temporary`.
-  Controls whether to draw distributions of predictions instead of points. If `draw_distribution == 0`, it will draw results as normal coordinates; If `draw_distribution == 1`, it will draw all results in the distribution way, and points from different time steps will be drawn with different colors. 
-  The default value is `0`.
-- `--draw_exclude_type` (short for `-det`): type=`str`, argtype=`temporary`.
-  Draw visualized results of agents except for user-assigned types. If the assigned types are `"Biker_Cart"` and the `draw_results` or `draw_videos` is not `"null"`, it will draw results of all types of agents except "Biker" and "Cart". It supports partial match, and it is case-sensitive. 
-  The default value is `null`.
-- `--draw_extra_outputs`: type=`int`, argtype=`temporary`.
-  Choose whether to draw (put text) extra model outputs on the visualized images. 
-  The default value is `0`.
-- `--draw_index`: type=`str`, argtype=`temporary`.
-  Indexes of test agents to visualize. Numbers are split with `_`. For example, `'123_456_789'`. 
-  The default value is `all`.
 - `--draw_results` (short for `-dr`): type=`str`, argtype=`temporary`.
   Controls whether to draw visualized results on video frames. Accept the name of one video clip. The codes will first try to load the video file according to the path saved in the `plist` file (saved in `dataset_configs` folder), and if it loads successfully it will draw the results on that video, otherwise it will draw results on a blank canvas. Note that `test_mode` will be set to `'one'` and `force_split` will be set to `draw_results` if `draw_results != 'null'`. 
   The default value is `null`.
@@ -201,6 +195,9 @@ About the `argtype`:
 - `--lr` (short for `-lr`): type=`float`, argtype=`static`.
   Learning rate. 
   The default value is `0.001`.
+- `--macos`: type=`int`, argtype=`temporary`.
+  (Experimental) Choose whether enable the `MPS (Metal Performance Shaders)` on Apple platforms (instead of running on CPUs). 
+  The default value is `0`.
 - `--max_agents`: type=`int`, argtype=`static`.
   Max number of agents to predict in one frame. It only works when `model_type == 'frame-based'`. 
   The default value is `50`.
@@ -251,9 +248,6 @@ About the `argtype`:
   The default value is `1`.
 - `--update_saved_args`: type=`int`, argtype=`temporary`.
   Choose whether to update (overwrite) the saved arg files or not. 
-  The default value is `0`.
-- `--use_seg_maps`: type=`int`, argtype=`dynamic`.
-  Controls whether to use segmentation maps instead of the calculated trajectory maps. 
   The default value is `0`.
 - `--verbose` (short for `-v`): type=`int`, argtype=`temporary`.
   Controls if print verbose logs and outputs to the terminal. 
@@ -331,7 +325,7 @@ About the `argtype`:
   The transformation on SocialCircle. It could be: - `none`: no transformations - `fft`: fast Fourier transform - `haar`: haar wavelet transform - `db2`: DB2 wavelet transform 
   The default value is `none`.
 - `--partitions`: type=`int`, argtype=`static`.
-  Partitions in the SocialCircle. Set it to `-1` to adapt to different observation/prediction length settings. 
+  Partitions in the SocialCircle. It should be manually set at each training run. 
   The default value is `-1`.
 - `--rel_speed`: type=`int`, argtype=`static`.
   Choose whether to use the relative speed or the absolute speed as the speed factor in the SocialCircle. (Default to the `absolute speed`) 
@@ -348,6 +342,24 @@ About the `argtype`:
 - `--use_velocity`: type=`int`, argtype=`static`.
   Choose whether to use the velocity factor in the SocialCircle. 
   The default value is `1`.
+
+### Visualization Args
+
+- `--draw_distribution`: type=`int`, argtype=`temporary`.
+  Controls whether to draw distributions of predictions instead of points. If `draw_distribution == 0`, it will draw results as normal coordinates; If `draw_distribution == 1`, it will draw all results in the distribution way, and points from different time steps will be drawn with different colors. 
+  The default value is `0`.
+- `--draw_exclude_type`: type=`str`, argtype=`temporary`.
+  Draw visualized results of agents except for user-assigned types. If the assigned types are `"Biker_Cart"` and the `draw_results` or `draw_videos` is not `"null"`, it will draw results of all types of agents except "Biker" and "Cart". It supports partial match, and it is case-sensitive. 
+  The default value is `null`.
+- `--draw_extra_outputs`: type=`int`, argtype=`temporary`.
+  Choose whether to draw (put text) extra model outputs on the visualized images. 
+  The default value is `0`.
+- `--draw_index`: type=`str`, argtype=`temporary`.
+  Indexes of test agents to visualize. Numbers are split with `_`. For example, `'123_456_789'`. 
+  The default value is `all`.
+- `--draw_lines`: type=`int`, argtype=`temporary`.
+  Choose whether to draw lines between each two 2D trajectory points. 
+  The default value is `0`.
 <!-- DO NOT CHANGE THIS LINE -->
 
 ## Contact us

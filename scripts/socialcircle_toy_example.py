@@ -2,7 +2,7 @@
 @Author: Conghao Wong
 @Date: 2023-07-12 17:38:42
 @LastEditors: Conghao Wong
-@LastEditTime: 2023-09-07 09:06:53
+@LastEditTime: 2023-10-25 09:35:49
 @Description: file content
 @Github: https://cocoon2wong.github.io
 @Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -11,22 +11,23 @@
 import os
 import sys
 import tkinter as tk
+from copy import copy
 from tkinter import filedialog
 
 import numpy as np
-import tensorflow as tf
+import torch
 from matplotlib import pyplot as plt
 from utils import TK_BORDER_WIDTH, TK_TITLE_STYLE, TextboxHandler
 
 sys.path.insert(0, os.path.abspath('.'))
 import qpid
-from qpid.utils import dir_check, get_mask
 from main import main
+from qpid.utils import dir_check, get_mask, move_to_device
 
 DATASET = 'ETH-UCY'
 SPLIT = 'zara1'
 CLIP = 'zara1'
-MODEL_PATH = 'weights/Silverbullet/SocialCircle_zara1'
+MODEL_PATH = 'weights/20231011-112651torch_test_2_evsczara1'
 
 TEMP_IMG_PATH = './temp_files/socialcircle_toy_example/fig.png'
 LOG_PATH = './temp_files/socialcircle_toy_example/run.log'
@@ -39,20 +40,20 @@ class BetaToyExample():
         self.t: qpid.training.Structure = None
         self.image: tk.PhotoImage = None
 
-        self.inputs: list[tf.Tensor] = None
-        self.outputs: list[tf.Tensor] = None
-        self.input_and_gt: list[list[tf.Tensor]] = None
+        self.inputs: list[torch.Tensor] = None
+        self.outputs: list[torch.Tensor] = None
+        self.input_and_gt: list[list[torch.Tensor]] = None
 
         self.load_model(args)
-        
+
     def init_model(self):
         self.t.model = self.t.create_model()
         self.t.agent_manager.set_types(self.t.model.input_types,
                                        self.t.label_types)
-        
+
         if self.input_and_gt is None:
-            self.input_and_gt = \
-                list(self.t.agent_manager.make(CLIP, 'test'))
+            ds = self.t.agent_manager.make(CLIP, 'test')
+            self.input_and_gt = [ds.dataset.inputs, ds.dataset.labels]
 
     def load_model(self, args: list[str]) -> qpid.training.Structure:
         try:
@@ -67,8 +68,8 @@ class BetaToyExample():
     def run_on_agent(self, agent_index: int,
                      extra_neighbor_position=None):
 
-        inputs = self.input_and_gt[agent_index][:-1]
-        inputs = [i[tf.newaxis] for i in inputs]
+        inputs = self.input_and_gt[0]
+        inputs = [i[agent_index][None] for i in inputs]
 
         if (p := extra_neighbor_position) is not None:
             nei = self.add_one_neighbor(inputs, p)
@@ -77,7 +78,7 @@ class BetaToyExample():
         self.forward(inputs)
         self.draw_results()
 
-    def add_one_neighbor(self, inputs: list[tf.Tensor],
+    def add_one_neighbor(self, inputs: list[torch.Tensor],
                          position: list[tuple[float, float]]):
         '''
         Shape of `nei` should be `(1, max_agents, obs, 2)`
@@ -85,7 +86,7 @@ class BetaToyExample():
         obs = inputs[0]
         nei = inputs[1]
 
-        nei = nei.numpy()
+        nei = copy(nei.numpy())
         steps = nei.shape[-2]
 
         xp = np.array([0, steps-1])
@@ -97,19 +98,25 @@ class BetaToyExample():
 
         nei_count = self.get_neighbor_count(nei)
         nei[0, nei_count] = traj - obs.numpy()[0, -1:, :]
-        return tf.cast(nei, tf.float32)
+        return torch.from_numpy(nei)
 
-    def forward(self, inputs: list[tf.Tensor]):
+    def forward(self, inputs: list[torch.Tensor]):
         self.inputs = inputs
-        self.outputs = self.t.model.forward(inputs, training=False)
+        with torch.no_grad():
+            self.outputs = self.t.model.implement(inputs, training=False)
+        self.outputs = move_to_device(self.outputs, self.t.device_cpu)
 
-    def get_neighbor_count(self, neighbor_obs: tf.Tensor):
+    def get_neighbor_count(self, neighbor_obs: torch.tensor):
         '''
         Input's shape should be `(1, max_agents, obs, dim)`.
         '''
         nei = neighbor_obs[0]
-        nei_mask = get_mask(tf.reduce_sum(nei, axis=[-1, -2]))
-        return int(tf.reduce_sum(nei_mask))
+
+        if issubclass(type(nei), np.ndarray):
+            nei = torch.from_numpy(nei)
+
+        nei_mask = get_mask(torch.sum(nei, dim=[-1, -2]))
+        return int(torch.sum(nei_mask))
 
     def draw_results(self):
         inputs = self.inputs
@@ -128,7 +135,7 @@ class BetaToyExample():
         # draw neighbors
         nei_count = self.get_neighbor_count(inputs[1])
         _nei = c_nei[:nei_count, :, :] + c_obs[np.newaxis, -1, :]
-        plt.plot(_nei[:, -1, 0], _nei[:, -1, 1], 'o', 
+        plt.plot(_nei[:, -1, 0], _nei[:, -1, 1], 'o',
                  color='darkorange', markersize=13)
 
         # draw neighbors' trajectories
@@ -253,10 +260,10 @@ if __name__ == '__main__':
     tk.Label(right_frame, text='Predictions',
              **TK_TITLE_STYLE, **r_args, **t_args).grid(
                  column=0, row=0, sticky=tk.W)
-    
+
     tk.Label(right_frame, text='Model Path:', width=16, anchor=tk.E, **r_args, **t_args).grid(
         column=0, row=1)
-    (model_path := tk.Label(right_frame, width=60, wraplength=510, 
+    (model_path := tk.Label(right_frame, width=60, wraplength=510,
                             text=MODEL_PATH, **r_args, **t_args)).grid(
         column=1, row=1)
 
