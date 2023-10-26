@@ -11,7 +11,7 @@ gh-badge: [star, fork]
  * @Author: Conghao Wong
  * @Date: 2023-08-21 15:58:54
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-09-07 14:56:53
+ * @LastEditTime: 2023-10-26 17:30:41
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -19,10 +19,23 @@ gh-badge: [star, fork]
 
 ## Get Started
 
-You can clone [this repository](https://github.com/cocoon2wong/SocialCircle) by the following command:
+We previously used `TensorFlow 2` as the backend training engine.
+After this manuscript was made public, we decided to convert it to `PyTorch`.
+This conversion process is currently continuing, with related development codes placed in the [TorchVersion(beta)](https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta)) branch.
+
+You can clone [TensorFlow 2 version of codes](https://github.com/cocoon2wong/SocialCircle) by the following command:
 
 ```bash
 git clone https://github.com/cocoon2wong/SocialCircle.git
+cd SocialCircle
+```
+
+Or the [PyTorch version of codes](https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta)) by
+
+```bash
+git clone https://github.com/cocoon2wong/SocialCircle.git
+cd SocialCircle
+git checkout "TorchVersion(beta)"
 ```
 
 Then, run the following command to initialize all submodules:
@@ -33,7 +46,16 @@ git submodule update --init --recursive
 
 ## Requirements
 
-The codes are developed with Python 3.9.
+These codes are developed with different python versions:
+
+- TensorFlow 2 Version:
+
+    Codes ([https://github.com/cocoon2wong/SocialCircle/tree/main](https://github.com/cocoon2wong/SocialCircle/tree/main)) are developed with **Python 3.9**.
+
+- PyTorch Version:
+
+    Codes ([https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta)](https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta))) are developed with **Python 3.11**.
+
 Additional packages used are included in the `requirements.txt` file.
 
 {: .box-warning}
@@ -65,7 +87,6 @@ If you just want to validate these models on ETH-UCY and SDD, please head to the
 We have provided our pre-trained model weights to help you quickly evaluate the `SocialCircle` models' performance.
 Our pre-trained models contain:
 
-% - The basic transformer model for trajectory prediction (named the `Transformer`) and its SocialCircle variation `Transformer-SC` (8 frames' observations to 12 frames' predictions on SDD, only forecasts one deterministic trajectory for each agent);
 - `MSN` ([🔗homepage](https://northocean.github.io/MSN/)) and its SocialCircle variation `MSN-SC` (8-to-12 on SDD, forecasts 20 random sampled trajectories for each agent);
 - `V^2-Net` ([🔗homepage](https://cocoon2wong.github.io/Vertical/)) and its SocialCircle variation `V^2-Net-SC` (8-to-12 on SDD, 20 trajectories);
 - `E-V^2-Net` ([🔗homepage](https://cocoon2wong.github.io/E-Vertical/)) and its SocialCircle variation `E-V^2-Net-SC` (8-to-12 on SDD, 20 trajectories).
@@ -78,7 +99,13 @@ You can run the following commands to prepare ETH-UCY and SDD dataset files:
     cd dataset_original && python main_ethucysdd.py
     ```
 
-2. Back to the repo folder and create soft links:
+2. For the `PyTorch` version, you can run the following command inner the `dataset_original` folder to transfer dataset files of NBA dataset. ***(Optional)***
+
+    ```bash
+    python main_nba.py
+    ```
+
+3. Back to the repo folder and create soft links:
 
     ```bash
     cd ..
@@ -90,9 +117,14 @@ Click the following buttons to download our weights and learn more about how to 
 We recommend that you download the weights and place them in the `weights/SocialCircle` folder.
 
 <div style="text-align: center;">
-    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/releases">⬇️ Download Weights</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/releases">⬇️ Download Weights (TensorFlow 2)</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch">⬇️ Download Weights (PyTorch)</a>
     <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
 </div>
+
+{: .box-warning}
+**Warning:** The TensorFlow 2 version of codes only support weights that trained with TensorFlow 2, and the PyTorch version of codes only support weights that trained with PyTorch.
+Please download the correct weights file or the program will not run correctly.
 
 You can start evaluating our pre-trained weights by
 

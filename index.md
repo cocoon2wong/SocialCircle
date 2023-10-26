@@ -8,7 +8,7 @@ cover-img: /subassets/img/head.JPG
  * @Author: Conghao Wong
  * @Date: 2023-03-21 17:52:21
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2023-10-12 20:17:21
+ * @LastEditTime: 2023-10-26 17:01:35
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -22,7 +22,10 @@ Click the buttons below for more information.
 
 <div style="text-align: center;">
     <a class="btn btn-colorful btn-lg" href="https://arxiv.org/abs/2310.05370">📖 Paper</a>
-    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle">🛠️ Codes</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/blob/page/subassets/img/main.pdf">📖 Supplemental Materials</a>
+    <br><br>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle">🛠️ Codes (TensorFlow 2)</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta)">🛠️ Codes (PyTorch)</a>
     <a class="btn btn-colorful btn-lg" href="./guidelines">💡 Codes Guidelines</a>
 </div>
 
