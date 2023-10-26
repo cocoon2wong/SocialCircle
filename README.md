@@ -10,6 +10,13 @@
 
 # SocialCircle
 
+This is the official codes (*TensorFlow2 version*) for "SocialCircle: Learning the Angle-based Social Interaction Representation for Pedestrian Trajectory Prediction".
+
+We also provide the corresponding PyTorch codes (beta version for now) in the [TorchVersion(beta)](https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta)) branch.
+Please note that model weights that trained with different backends (TensorFlow2 or PyTorch) can not be used in the other version of codes.
+Weights released in [this page](https://github.com/cocoon2wong/SocialCircle/releases) are trained under *TensorFlow2*.
+For weights trained with PyTorch, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch).
+
 ## Get Started
 
 You can clone [this repository](https://github.com/cocoon2wong/SocialCircle) by the following command:
