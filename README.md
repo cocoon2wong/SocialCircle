@@ -20,7 +20,13 @@ You can clone [this repository](https://github.com/cocoon2wong/SocialCircle) by 
 git clone https://github.com/cocoon2wong/SocialCircle.git
 ```
 
-Then, run the following command to initialize all submodules:
+Then, check out this branch:
+
+```bash
+git checkout "TorchVersion(beta)"
+```
+
+Run the following command to initialize all submodules:
 
 ```bash
 git submodule update --init --recursive
