@@ -11,7 +11,7 @@ gh-badge: [star, fork]
  * @Author: Conghao Wong
  * @Date: 2023-08-21 15:58:54
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-04-11 16:04:35
+ * @LastEditTime: 2024-06-05 10:08:19
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -126,7 +126,7 @@ We recommend that you download the weights and place them in the `weights/Social
 
 <div style="text-align: center;">
     <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/releases">⬇️ Download Weights (TensorFlow 2)</a>
-    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch">⬇️ Download Weights (PyTorch)</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle">⬇️ Download Weights (PyTorch)</a>
 </div>
 
 {: .box-warning}
