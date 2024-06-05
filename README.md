@@ -15,7 +15,7 @@ This is the official codes (*TensorFlow2 version*) for "SocialCircle: Learning t
 We also provide the corresponding PyTorch codes (beta version for now) in the [TorchVersion(beta)](https://github.com/cocoon2wong/SocialCircle/tree/TorchVersion(beta)) branch.
 Please note that model weights that trained with different backends (TensorFlow2 or PyTorch) can not be used in the other version of codes.
 Weights released in [this page](https://github.com/cocoon2wong/SocialCircle/releases) are trained under *TensorFlow2*.
-For weights trained with PyTorch, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch).
+For weights trained with PyTorch, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle).
 
 ## Get Started
 
@@ -104,7 +104,7 @@ We recommend that you download the weights and place them in the `weights/Social
 
 <div style="text-align: center;">
     <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/releases">⬇️ Download Weights (TensorFlow 2)</a>
-    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch">⬇️ Download Weights (PyTorch)</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle">⬇️ Download Weights (PyTorch)</a>
 </div>
 
 {: .box-warning}
