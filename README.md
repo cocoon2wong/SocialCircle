@@ -89,7 +89,7 @@ Click the following buttons to download our weights and learn more about how to 
 We recommend that you download the weights and place them in the `weights/SocialCircle` folder.
 
 <div style="text-align: center;">
-    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/SocialCircle/releases">⬇️ Download Weights</a>
+    <a class="btn btn-colorful btn-lg" href="https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle">⬇️ Download Weights (PyTorch)</a>
     <a class="btn btn-colorful btn-lg" href="https://cocoon2wong.github.io/Project-Luna/howToUse/">💡 Dataset Guidelines</a>
 </div>
 
@@ -102,7 +102,7 @@ See [this document](https://cocoon2wong.github.io/Project-Luna/) for details.
 
 We have provided our pre-trained model weights to help you quickly evaluate the `SocialCircle` models' performance.
 
-You can go to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/main/Silverbullet-Torch) to download the corresponding weights.
+You can go to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle) to download the corresponding weights.
 
 {: .box-warning}
 **Warning:** The PyTorch version of codes only support weights that trained with PyTorch.
