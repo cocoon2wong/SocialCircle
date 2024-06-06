@@ -17,6 +17,10 @@ Please note that model weights that trained with different backends (TensorFlow2
 Weights released in [this page](https://github.com/cocoon2wong/SocialCircle/releases) are trained under *TensorFlow2*.
 For weights trained with PyTorch, please refer to [this page](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle).
 
+**2024.06.06 Update**: The code repository for our subsequent work "SocialCircle+: Learning the Angle-based Conditioned Interaction Representation for Pedestrian Trajectory Prediction" is now available at [SocialCirclePlus](https://github.com/cocoon2wong/SocialCirclePlus).
+If you are interested in our work, feel free to try it!
+It is used in exactly the same way as the SocialCircle repository, and is compatible with the pytorch version of SocialCircle model weights.
+
 ## Get Started
 
 You can clone [this repository](https://github.com/cocoon2wong/SocialCircle) by the following command:
