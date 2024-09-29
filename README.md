@@ -2,7 +2,7 @@
  * @Author: Conghao Wong
  * @Date: 2023-08-21 15:58:54
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-04-11 16:08:21
+ * @LastEditTime: 2024-09-29 09:42:17
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.
@@ -87,6 +87,13 @@ You can run the following commands to prepare dataset files that have been valid
     ln -s dataset_original/dataset_processed ./
     ln -s dataset_original/dataset_configs ./
     ```
+
+**Dataset Corrections**:
+The `univ13` split (ETH-UCY) takes `univ` and `univ3` as test sets, and other sets {`eth`, `hotel`, `unive`, `zara1`, `zara2`, `zara3`} as training sets.
+Differently, the `univ` split only includes `univ` for testing models.
+Our reported results in this conference paper are tested under split `univ`.
+Following most current approaches, we have test them and report results with the new split `univ13` in the corresponding journal-expanded paper `SocialCircle+` (codes repo [here](https://github.com/cocoon2wong/SocialCirclePlus), paper available on [arXiv](https://arxiv.org/abs/2409.14984)).
+Correspondingly, some `SocialCircle` results have been corrected, and please check them in the [`SocialCirclePlus` repo](https://github.com/cocoon2wong/SocialCirclePlus) with the newly trained weights in the [weights repo](https://github.com/cocoon2wong/Project-Monandaeg/tree/SocialCircle) (postfixed with `univ13`).
 
 Click the following button to learn more about how to process these dataset files.
 
