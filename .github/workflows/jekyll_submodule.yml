@@ -33,21 +33,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          submodules: recursive
-          
-      - name: Copy softlink files
+
+      - name: Delete softlink files
         run: |
-          mv ./_layouts ./_layouts_backup
-          mv ./_includes ./_includes_backup
-          mv ./assets ./assets_backup
-          mkdir ./assets
-          mkdir ./_includes
-          mkdir ./_layouts
-          cp -r ./assets_backup/* ./assets/
-          cp -r ./_includes_backup/* ./_includes/
-          cp -r ./_layouts_backup/* ./_layouts/
-          ls
+          rm ./_data
+          rm ./_includes
+          rm ./_layouts
+          rm ./assets
+
+      - name: Clone the newest templete and copy files
+        run: |
+          git clone https://github.com/cocoon2wong/Project-Zero-Divided.git
+          cd Project-Zero-Divided
+          git checkout Unpredictable
+          cd ..
+          cp -r ./Project-Zero-Divided/_data ./
+          cp -r ./Project-Zero-Divided/_includes ./
+          cp -r ./Project-Zero-Divided/_layouts ./
+          cp -r ./Project-Zero-Divided/assets ./
           
       - name: Build the site in the jekyll/builder container
         uses: actions/jekyll-build-pages@v1
