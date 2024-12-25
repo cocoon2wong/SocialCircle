@@ -36,7 +36,6 @@ jobs:
 
       - name: Delete softlink files
         run: |
-          rm ./_data
           rm ./_includes
           rm ./_layouts
           rm ./assets
