@@ -1,6 +1,7 @@
 ---
 layout: page
-add-md-links: true
+table-of-contents: true
+breadcrumbs: true
 title: Codes Guidelines
 subtitle: "Official implementation of the paper \"SocialCircle: Learning the Angle-based Social Interaction Representation for
 Pedestrian Trajectory Prediction\""
@@ -11,7 +12,7 @@ gh-badge: [star, fork]
  * @Author: Conghao Wong
  * @Date: 2023-08-21 15:58:54
  * @LastEditors: Conghao Wong
- * @LastEditTime: 2024-06-05 10:08:19
+ * @LastEditTime: 2025-03-25 12:33:38
  * @Description: file content
  * @Github: https://cocoon2wong.github.io
  * Copyright 2023 Conghao Wong, All Rights Reserved.

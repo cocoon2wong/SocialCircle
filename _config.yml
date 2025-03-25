@@ -12,8 +12,17 @@
 # Name of website
 title: "Project Unpredictable: SocialCircle"
 
+# Website settings
+url: "https://cocoon2wong.github.io"
+baseurl: "/SocialCircle"
+page-branch: "page"
+repository: "cocoon2wong/SocialCircle"
+
+# Paper information
+arxiv-id: "2310.05370"
+
 # Your name to show in the footer
-author: Copyright ©️ Beihao Xia & Conghao Wong
+author: Copyright ©️ Team Unpredictable
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -21,13 +30,9 @@ author: Copyright ©️ Beihao Xia & Conghao Wong
 
 navbar-links:
   Home: "/index"
+  Codes: "https://github.com/cocoon2wong/SocialCircle"
   How To Use: "/guidelines"
-  GitHub Repo: "https://github.com/cocoon2wong/SocialCircle"
   Project Unpredictable: "https://cocoon2wong.github.io/index"
-  GitHub:
-    - Beihao Xia: "https://github.com/northocean"
-    - Conghao Wong: "https://github.com/cocoon2wong"
-
 ################
 # --- Logo --- #
 ################
@@ -81,7 +86,7 @@ social-network-links:
 
 # If you want your website to generate an RSS feed, provide a description
 # The URL for the feed will be https://<your_website>/feed.xml
-rss-description: This website is a virtual proof that I'm awesome
+# rss-description: This website is a virtual proof that I'm awesome
 
 ###########################
 # --- General options --- #
@@ -111,7 +116,7 @@ feed_show_tags: true
 post_search: true
 
 # Add a button in the footer to edit the current page. Only works if your website is hosted on GitHub
-edit_page_button: false
+edit_page_button: True
 
 # Allow sub-menu items (second-level navigation menu items) to be longer than the top-level menu
 # If this setting is off, then long sub-menu words might get cut off
@@ -258,13 +263,13 @@ date_format: "%B %-d, %Y"
 
 # Output options (more information on Jekyll's site)
 timezone: "America/Toronto"
-markdown: kramdown
+markdown: GFM 
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
 paginate: 5
 
-kramdown:
-  input: GFM
+# kramdown:
+#   input: GFM
 
 # Default YAML values (more information on Jekyll's site)
 defaults:
@@ -293,10 +298,17 @@ exclude:
   - screenshot.png
   - docs/
   - Project-Zero/
+  - Project-Zero-Divided/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
 
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-gfm-admonitions
+  - jekyll-optional-front-matter
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
