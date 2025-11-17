@@ -21,6 +21,21 @@ For weights trained with PyTorch, please refer to [this page](https://github.com
 If you are interested in our work, feel free to try it!
 It is used in exactly the same way as the SocialCircle repository, and is compatible with the pytorch version of SocialCircle model weights.
 
+## Authors' Note
+
+This work is the first part in our *Echolocation Trilogy*.
+It focuses on how to describe and locate echoes from agents spatially.
+The third work in this series, *Reverberation*, is now available on arXiv.
+
+Here are all the repositories involved in our trilogy:
+
+- Part I, **Where do the echoes come from?**: [*SocialCircle*](https://github.com/cocoon2wong/SocialCircle)  (CVPR 2024) and [*SocialCirclePlus*](https://github.com/cocoon2wong/SocialCirclePlus) (Journal, Under Review);
+- Part II, **How echoes interact with each other?**: [*Resonance*](https://github.com/cocoon2wong/Re) (ICCV 2025);
+- Part III, **How long do the echoes last?**: [*Reverberation*](https://github.com/cocoon2wong/Rev) (Journal, Under Review).
+
+Note that these repositories share the same training engine and the weight files are compatible with each other (in the order in which the repositories were released, the later released repositories are compatible with the weights of the previous releases, the [*Reverberation*](https://github.com/cocoon2wong/Rev) repository is recommended as it is compatible with all previous models).
+You can copy only the core model folders, e.g. `SocialCircle`, `Re`, `Rev`, etc., to a repository's root path (i.e., the folder where `qpid` is located), and train and test the models via `main.py`.
+
 ## Get Started
 
 You can clone [this repository](https://github.com/cocoon2wong/SocialCircle) by the following command:
